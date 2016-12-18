@@ -1,33 +1,52 @@
 package prova;
 
 import javax.swing.*;
-import java.util.Formatter;
-public class CriarTxt {
-	String nomeDoArquivo = "DadosDeCadastro.txt";	
-	public String nomeDeUsuario[] = new String [5];
-	String senha[] = new String[5];
-	String informacoes = "";
-	public String login[][] = new String[5][2];
-	public int a = 0;
-	boolean control = false;
-	
-	public void CriarTXT(){
-		try {
-			Formatter saida = new Formatter(this.nomeDoArquivo);
-			JOptionPane.showMessageDialog(null, "Digite os dados do seu cadastro:");
-			this.nomeDeUsuario[a] = JOptionPane.showInputDialog("Nome de usuário:");
-			this.senha[a] = JOptionPane.showInputDialog("Senha:");
-			login[a][0] = this.nomeDeUsuario[a];
-			login[a][1] = this.senha[a];
-			informacoes += this.nomeDeUsuario[a] + "\n" + this.senha[a] + "\n\n";
-			saida.format(informacoes);
-			a++;
-			saida.close();
-			JOptionPane.showMessageDialog(null,"Arquivo " + this.nomeDoArquivo + " criado!", "Arquivo",1 );
-		}
-		catch (Exception erro){
-			JOptionPane.showMessageDialog(null, "Arquivo não põde ser gerado");
+import java.io.*;
+public class LerTxt {
+	CriarTxt nome = new CriarTxt();
+	String loginUsuario[] = new String[5];
+	String loginSenha[] = new String[5];
+	String mostrar = ""; //Local para armazenar o conteudo do arquivo
+	String nomeDoArq = nome.nomeDoArquivo;
+	// nome do do arquivo (eu importei da classe 'CriarTxt' para manter o mesmo nome)
+	String linha = "";
+	String login[][] = new String[5][2];
+	int a = 0; //parametro apra mudar a leitura de usuario e senha
+	public void LerTXT(){
+		File arquivo = new File(nomeDoArq); 
+		if(arquivo.exists()){ //retorna valor verdadeiro ou falso
+			mostrar = "Arquivo: " + nomeDoArq + "\n";
+			try{
+				mostrar += "Dados:\n";
+				//abrindo arquivo para leitura
+				FileReader reader = new FileReader(nomeDoArq);
+				//leitor do arquivo
+				BufferedReader leitor = new BufferedReader(reader);
+				while(true){
+					loginUsuario[a] = leitor.readLine();
+					loginSenha[a] = leitor.readLine();
+					linha = leitor.readLine();
+					login[a][0] = loginUsuario[a];
+					login[a][1] = loginSenha[a];
+					if((linha == null) || (loginUsuario[a] == null) || (loginSenha[a] == null)){
+						break;
+					}
+					mostrar += "Usuário[" + a + "]: " + "\n" + "Nome: " + loginUsuario[a] + "\n" +
+							"Senha: " + loginSenha[a] + linha + "\n\n";
+				a++;
+				}
+				leitor.close();
+			}
+			catch (Exception erro) {}
+			/*
+			for(int i = 0; i < 5; i++){
+				loginUsuario[a] = 0;
+				loginSenha[a] = 0; 
+			}
+			*/
+			JOptionPane.showMessageDialog(null, mostrar + "\n", nomeDoArq, 1);
+		} else {
+			JOptionPane.showMessageDialog(null, "Arquivo não existe", "Erro", 0);
 		}
 	}
-
 }
