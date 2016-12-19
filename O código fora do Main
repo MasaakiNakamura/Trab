@@ -1924,44 +1924,45 @@ abstract class Personagem {
 	}
 
 	public void setNome(String nome) {
-		try{
-			if (nome.length() > 16){
-				throw (ArrayIndexOutOfBoundsException);
-			}
+		
 		this.nome = nome;
-		}
-		catch(ArrayIndexOutOfBoundsException a){}
 	}
 
 	public int golpePrimarioMonstro(int vidaDoInim, int danoDeAtaquePerso, int defesaInim, int danoPrimario,
 			double multDeDano) {
-		 
-		return 0; // a definir
-	}
-	
-	public int golpeSecundarioMonstro(int vidaDoInimigo, int danoDeAtaquePerso, int defesaInim, int danoSecundario,
+			                int novavida = (int) (danoPrimario+(danoDeAtaquePerso-defesaInim)*multDeDano);
+			                vidaDoInim = novavida;
+			return vidaDoInim; 
+			}
+			public int golpeSecundarioMonstro(int vidaDoInimigo, int danoDeAtaquePerso, int defesaInim, int danoSecundario,
 			double multDeDano) {
-		return 0; // a definir
-	}	
-	
-	public int golpeEspecialMonstro(int vidaDoInimigo, int danoDeAtaquePerso, int defesaInim, int danoEspecial,
+			int novavida = (int) (danoSecundario+(danoDeAtaquePerso-defesaInim)*multDeDano);
+			                vidaDoInimigo = novavida;
+			return vidaDoInimigo;
+			} 
+			public int golpeEspecialMonstro(int vidaDoInimigo, int danoDeAtaquePerso, int defesaInim, int danoEspecial,
 			double multDeDano) {
-		return 0; // a definir
-	}	
-	
-	public int golpePrimarioHeroi(int vidaDoInim, int danoDeAtaquePerso, int defesaInim, int danoPrimario) {
-		return 0; // a definir
-	}
-	
-	public int golpeSecundarioHeroi(int vidaDoPers, int danoDeAtaquePerso, int defesaInim, int danoSecundario) {
-		return 0; // a definir
-	}
+			int novavida = (int) (danoEspecial+(danoDeAtaquePerso-defesaInim)*multDeDano);
+			                vidaDoInimigo = novavida;
+			return vidaDoInimigo;
+			} 
+			public int golpePrimarioHeroi(int vidaDoInim, int danoDeAtaquePerso, int defesaInim, int danoPrimario) {
+			int novavida = (int) (danoPrimario*(danoDeAtaquePerso-defesaInim));
+			                vidaDoInim = novavida;
+			return vidaDoInim;
+			}
+			public int golpeSecundarioHeroi(int vidaDoPers, int danoDeAtaquePerso, int defesaInim, int danoSecundario) {
+			int novavida = (int) (danoSecundario*(danoDeAtaquePerso-defesaInim));
+			                vidaDoPers = novavida;
+			return vidaDoPers;
+			}
 
-	public int golpeEspecialHeroi(int vidaDoPers, int vidaDoInim, int danoDeAtaquePerso, int defesaInim,
+			public int golpeEspecialHeroi(int vidaDoPers, int vidaDoInim, int danoDeAtaquePerso, int defesaInim,
 			int danoEspecial) {
-		
-		return 0	; // a definir
-	}	
+			int novavida = (int) (danoEspecial*(danoDeAtaquePerso-defesaInim));
+			                vidaDoPers = novavida;
+			return vidaDoPers;
+			} 	
 }	
 
 class Herois extends Personagem {
