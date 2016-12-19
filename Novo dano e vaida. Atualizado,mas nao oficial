@@ -1,0 +1,61 @@
+Mago
+		mago.setVida(600);
+		mago.setAtaque(rand.nextInt(20) + 5); // valor randomico para o ataque do mago
+		mago.setDefesa(rand.nextInt(20) + 20); // valor randomico para a defesa do mago
+		mago.setDanoGolpePrimario(rand.nextInt(25) + 20);
+		mago.setDanoGolpeSecundario(rand.nextInt(30) + 25);// alterado pq estava "primario"
+		mago.setDanoDoEspecial(rand.nextInt(35) + 35);
+
+        mago.setVida(mago.getVida()*1.20);
+		mago.setAtaque(mago.getAtaque() + 5);
+		mago.setDefesa(mago.getDefesa() + 5);
+
+
+			if (habilidade == 0) { // Comparação: se a habilidade selecionada
+				// for o golpe primário.
+				JOptionPane.showMessageDialog(null, mago.getNomeGolpePrimario());
+				mago.setDanoGolpePrimario(mago.getDanoGolpePrimarioInicial() + rand.nextInt(25));
+				
+				dragon.setVida(mago.golpePrimarioHeroi(dragon.getVida(), mago.getAtaque(), gigante.getDefesa(),
+						mago.getDanoGolpePrimario()));
+				
+				mago.setDanoGolpePrimario(mago.getDanoGolpePrimarioInicial());
+				// Comparação: se a habilidade selecionada for o Golpe Primário.
+				countH++;// contado	r para disponibilizar o uso do poder
+// 	especial.
+			} else if (habilidade == 1) {
+// Comparação: se a habilidade selecionada for o golpe
+				// secundário.
+				JOptionPane.showMessageDialog(null, mago.getNomeGolpeSecundario());
+				mago.setDanoGolpeSecundario(mago.getDanoGolpeSecundarioInicial() + rand.nextInt(30));
+				
+				dragon.setVida(mago.golpeSecundarioHeroi(dragon.getVida(), mago.getAtaque(), dragon.getDefesa(),
+						mago.getDanoDoGolpeSecundario())); // Se aplica o método Golpe Secundário()
+				
+				mago.setDanoGolpePrimario(mago.getDanoGolpeSecundarioInicial());
+				countH++;
+			} else if (habilidade == 2) { //// Comparação: se a habilidade
+						//	// selecionada for Golpe Especial
+				JOptionPane.showMessageDialog(null, mago.getNomeDoEspecial());
+				mago.setDanoDoEspecial(mago.getDanoDoEspecialInicial() + rand.nextInt(35));
+				
+				dragon.setVida(mago.golpeEspecialHeroi(mago.getVida(), dragon.getVida(), mago.getAtaque(),
+						dragon.getDefesa(), mago.getDanoDoEspecial()));
+				
+				mago.setDanoGolpePrimario(mago.getDanoDoEspecialInicial());
+
+Guerreiro
+		guerreiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+		guerreiro.setClasse("Guerreiro"); // Atribuição da Classe ao personagem
+		guerreiro.setTipo("Physical Damage"); // Atribuição do Tipo de personagem
+		guerreiro.setAtaque(rand.nextInt(25) + 15); // valor randomico para o ataque do mago
+		guerreiro.setDefesa(rand.nextInt(30) + 20); // valor randomico para a defesa do mago
+		guerreiro.setDanoGolpePrimario(rand.nextInt(20) + 15);
+		guerreiro.setDanoGolpeSecundario(rand.nextInt(25) + 20);
+		guerreiro.setDanoDoEspecial(rand.nextInt(30) + 25);
+		guerreiro.setNomeGolpePrimario("Normal Blade");
+		guerreiro.setNomeGolpeSecundario("Shikai");
+		guerreiro.setNomeDoEspecial("Bankai");
+		guerreiro.setVida(700);
+
+
