@@ -57,6 +57,26 @@ public class EscolhaPersonagem {
 		dragon.setVida(600);
 		gigante.setVida(700);
 		kraken.setVida(800);
+        dragon.setNomeGolpePrimario("Fire Ball"); 
+        dragon.setDanoGolpePrimario(rand.nextInt(15)+5);
+        dragon.setNomeGolpeSecundario("Burning Flame");
+        dragon.setDanoDoGolpeSecundario(rand.nextInt(15)+5);
+        dragon.setNomeDoEspecial("Hell Fire");
+        dragon.setDanoDoEspecial(rand.nextInt(15)+15);
+        
+        gigante.setNomeGolpePrimario("Smash"); 
+        gigante.setDanoGolpePrimario(rand.nextInt(20)+10);
+        gigante.setNomeGolpeSecundario("Tread");
+        gigante.setDanoDoGolpeSecundario(rand.nextInt(20)+10);
+        gigante.setNomeDoEspecial("Earth Shake");
+        gigante.setDanoDoEspecial(rand.nextInt(20)+25);
+        
+        kraken.setNomeGolpePrimario("Hit"); 
+        kraken.setDanoGolpePrimario(rand.nextInt(20)+15);
+        kraken.setNomeGolpeSecundario("Drown");
+        kraken.setDanoDoGolpeSecundario(rand.nextInt(20)+15);
+        kraken.setNomeDoEspecial("Sink Down");
+        kraken.setDanoDoEspecial(rand.nextInt(20)+35);
 		
 		Mago mago = new Mago();
 		mago.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
@@ -634,6 +654,26 @@ public class EscolhaPersonagem {
 		dragon.setVida(600);
 		gigante.setVida(700);
 		kraken.setVida(800);
+        dragon.setNomeGolpePrimario("Fire Ball"); 
+        dragon.setDanoGolpePrimario(rand.nextInt(15)+5);
+        dragon.setNomeGolpeSecundario("Burning Flame");
+        dragon.setDanoDoGolpeSecundario(rand.nextInt(15)+5);
+        dragon.setNomeDoEspecial("Hell Fire");
+        dragon.setDanoDoEspecial(rand.nextInt(15)+15);
+        
+        gigante.setNomeGolpePrimario("Smash"); 
+        gigante.setDanoGolpePrimario(rand.nextInt(20)+10);
+        gigante.setNomeGolpeSecundario("Tread");
+        gigante.setDanoDoGolpeSecundario(rand.nextInt(20)+10);
+        gigante.setNomeDoEspecial("Earth Shake");
+        gigante.setDanoDoEspecial(rand.nextInt(20)+25);
+        
+        kraken.setNomeGolpePrimario("Hit"); 
+        kraken.setDanoGolpePrimario(rand.nextInt(20)+15);
+        kraken.setNomeGolpeSecundario("Drown");
+        kraken.setDanoDoGolpeSecundario(rand.nextInt(20)+15);
+        kraken.setNomeDoEspecial("Sink Down");
+        kraken.setDanoDoEspecial(rand.nextInt(20)+35);
 
 		Guerreiro guerreiro = new Guerreiro();
 		guerreiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
@@ -1239,6 +1279,26 @@ public class EscolhaPersonagem {
 		dragon.setVida(600);
 		gigante.setVida(700);
 		kraken.setVida(800);
+        dragon.setNomeGolpePrimario("Fire Ball"); 
+        dragon.setDanoGolpePrimario(rand.nextInt(15)+5);
+        dragon.setNomeGolpeSecundario("Burning Flame");
+        dragon.setDanoDoGolpeSecundario(rand.nextInt(15)+5);
+        dragon.setNomeDoEspecial("Hell Fire");
+        dragon.setDanoDoEspecial(rand.nextInt(15)+15);
+        
+        gigante.setNomeGolpePrimario("Smash"); 
+        gigante.setDanoGolpePrimario(rand.nextInt(20)+10);
+        gigante.setNomeGolpeSecundario("Tread");
+        gigante.setDanoDoGolpeSecundario(rand.nextInt(20)+10);
+        gigante.setNomeDoEspecial("Earth Shake");
+        gigante.setDanoDoEspecial(rand.nextInt(20)+25);
+        
+        kraken.setNomeGolpePrimario("Hit"); 
+        kraken.setDanoGolpePrimario(rand.nextInt(20)+15);
+        kraken.setNomeGolpeSecundario("Drown");
+        kraken.setDanoDoGolpeSecundario(rand.nextInt(20)+15);
+        kraken.setNomeDoEspecial("Sink Down");
+        kraken.setDanoDoEspecial(rand.nextInt(20)+35);
 
 		Arqueiro arqueiro = new Arqueiro();
 		arqueiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
@@ -1864,7 +1924,13 @@ abstract class Personagem {
 	}
 
 	public void setNome(String nome) {
+		try{
+			if (nome.length() > 16){
+				throw (ArrayIndexOutOfBoundsException);
+			}
 		this.nome = nome;
+		}
+		catch(ArrayIndexOutOfBoundsException a){}
 	}
 
 	public int golpePrimarioMonstro(int vidaDoInim, int danoDeAtaquePerso, int defesaInim, int danoPrimario,
