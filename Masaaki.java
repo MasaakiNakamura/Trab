@@ -1,7 +1,6 @@
 package prova;
 
-import java.util.Random;
-import java.util.Scanner;
+
 import javax.swing.JOptionPane;;
 
 public class Prova {
@@ -29,7 +28,7 @@ public class Prova {
 			
 			JOptionPane.showMessageDialog(null, "Vidas: 1");
 			JOptionPane.showMessageDialog(null, "Jogue com sabedoria...");
-			Object[] herois = { "Mage", "Tanker", "Arqueiro" };
+			Object[] herois = { "Mage", "Guerreiro", "Arqueiro" };
 			escolha = JOptionPane.showOptionDialog(null, "Selecione uma classe para escolher o seu herói", " ",
 					JOptionPane.DEFAULT_OPTION, 3, null, herois, herois[0]);
 
@@ -95,11 +94,10 @@ public class Prova {
 					}
 				}
 			}
-			
-			JOptionPane.showMessageDialog(null, "Encerrando sessão...");
-			JOptionPane.showMessageDialog(null, "Volte Sempre ^^");
-			JOptionPane.showMessageDialog(null, "Sessão encerrada");
-			System.exit(0);
 		}
+		JOptionPane.showMessageDialog(null, "Encerrando sessão...");
+		JOptionPane.showMessageDialog(null, "Volte Sempre ^^");
+		JOptionPane.showMessageDialog(null, "Sessão encerrada");
+		System.exit(0);
 	}
 }
