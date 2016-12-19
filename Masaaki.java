@@ -9,9 +9,9 @@ public class Prova {
 		LerTxt lertxt = new LerTxt();
 		CriarTxt criartxt = new CriarTxt();
 		loginDoJogo login = new loginDoJogo();
-		EscolhaMago mago = new EscolhaMago();
-		EscolhaMago guerreiro = new EscolhaMago();
-		EscolhaMago arqueiro = new EscolhaMago();
+		EscolhaPersonagem mago = new EscolhaPersonagem();
+		EscolhaPersonagem guerreiro = new EscolhaPersonagem();
+		EscolhaPersonagem arqueiro = new EscolhaPersonagem();
 		int fimDeJogo = 0; // Varialvel inteira para saber se o usuario
 								// dese reiniciar o jogo, apos morrer.
 		boolean novoJogo = true; // variavel booleana para saber se o usuario
@@ -21,8 +21,6 @@ public class Prova {
 		int nivelDeDificuldade; // Armazena o nível de dificuldade
 		int escolha; // Variável interia para fazer comparações e saber qual
 						// herói o Jogador escolheu
-		int option; // Variável utilizada quando o personagem morre. Linha 198
-		Random rand = new Random();
 		Monstros monstros = new Monstros();
 
 		/*
