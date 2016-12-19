@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;;
 
 public class EscolhaPersonagem {
 	Random rand = new Random();
-	Monstros monstros = new Monstros();
+	
 	double multiplicadorDeDano; // multiplicador de dano
 	boolean novoJogo = true; // variável booleana para saber se o usuario deseja jogar um novo jogo, ou não
 	boolean novoPersonagem = false;
@@ -21,32 +21,12 @@ public class EscolhaPersonagem {
 	int resposta0; // Parametro para saber se o jogador já possui uma conta.
 	int resposta1; // Parametro para saber se o jogador já possui uma conta.
 	
+
 	public int mago() {
-		
-		Object[] dificuldade = { "Iniciante", "Intermediário", "Avançado", "Expert", "Impossible" };
-		nivelDeDificuldade = JOptionPane.showOptionDialog(null, "Selecione o nível de dificuldade: ", "Nível: ",
-				JOptionPane.DEFAULT_OPTION, 3, null, dificuldade, dificuldade[0]);
-		switch (nivelDeDificuldade) {
-		case 0:
-			monstros.setMultiplicadorDeDano(1.0);
-			break;
-		case 1:
-			monstros.setMultiplicadorDeDano(1.20);
-			break;
-		case 2:
-			monstros.setMultiplicadorDeDano(1.45);
-			break;
-		case 3:	
-			monstros.setMultiplicadorDeDano(1.80);
-			break;
-		case 4:
-			monstros.setMultiplicadorDeDano(2.0);
-			break;
-		}
 		
 		Random rand = new Random();
 		Monstros dragon = new Dragao(); // Criando o objeto Dragão
-		Monstros gigante = new Gigante(); // Craindo o objeto Gigante
+		Monstros gigante = new Gigante(); // Criando o objeto Gigante
 		Monstros kraken = new Kraken(); // Criando o objeto Bomba
 		dragon.setAtaque(rand.nextInt(15) + 5); // valor randomico para o ataque do dragão
 		dragon.setDefesa(rand.nextInt(15) + 5); // valor randomico para a defesa do dragão
@@ -54,23 +34,50 @@ public class EscolhaPersonagem {
 		gigante.setDefesa(rand.nextInt(20) + 5); // valor randomico para a defesa do gigante (alterado)
 		kraken.setAtaque(rand.nextInt(25) + 5); // valor randomico para o ataque do bomba (alterado)
 		kraken.setDefesa(rand.nextInt(25) + 5); // valor randomico para a defesa do bomba (alterado)
-		dragon.setVida(600);
-		gigante.setVida(700);
-		kraken.setVida(800);
+		dragon.setVida(60);
+		gigante.setVida(70);
+		kraken.setVida(80);
 		
-		Mago mago = new Mago();
+                dragon.setNomeGolpePrimario("Fire Ball");	
+                dragon.setDanoGolpePrimario(rand.nextInt(15)+5);
+                dragon.setNomeGolpeSecundario("Burning Flame");
+                dragon.setDanoDoGolpeSecundario(rand.nextInt(15)+5);
+                dragon.setNomeDoEspecial("Hell Fire");
+                dragon.setDanoDoEspecial(rand.nextInt(15)+15);
+                
+                gigante.setNomeGolpePrimario("Smash");	
+                gigante.setDanoGolpePrimario(rand.nextInt(20)+10);
+                gigante.setNomeGolpeSecundario("Tread");
+                gigante.setDanoDoGolpeSecundario(rand.nextInt(20)+10);
+                gigante.setNomeDoEspecial("Earth Shake");
+                gigante.setDanoDoEspecial(rand.nextInt(20)+25);
+                
+                kraken.setNomeGolpePrimario("Hit");	
+                kraken.setDanoGolpePrimario(rand.nextInt(20)+15);
+                kraken.setNomeGolpeSecundario("Drown");
+                kraken.setDanoDoGolpeSecundario(rand.nextInt(20)+15);
+                kraken.setNomeDoEspecial("Sink Down");
+                kraken.setDanoDoEspecial(rand.nextInt(20)+35);
+                
+                Mago mago = new Mago();
 		mago.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+		mago.setVida(60);
+		while(true){
+			if(novoPersonagem){
+				break;
+			}
 		mago.setClasse("Mago"); // Atribuição da Classe ao personagem
 		mago.setTipo("Magic Power"); // Atribuição do Tipo de personagem
 		mago.setAtaque(rand.nextInt(20) + 5); // valor randomico para o ataque do mago
 		mago.setDefesa(rand.nextInt(30) + 15); // valor randomico para a defesa do mago
-		mago.setDanoGolpePrimario(rand.nextInt(20) + 5);
-		mago.setDanoDoGolpeSecundario(rand.nextInt(25) + 5);// alterado pq estava "primario"
-		mago.setDanoDoEspecial(rand.nextInt(30) + 10);
+		mago.setDanoGolpePrimario(rand.nextInt(15) + 5);
+		mago.setDanoDoGolpeSecundario(rand.nextInt(20) + 5);// alterado pq estava "primario"
+		mago.setDanoDoEspecial(rand.nextInt(25) + 10);
 		mago.setNomeGolpePrimario("Dark Curse");
 		mago.setNomeGolpeSecundario("Light Hammer");
 		mago.setNomeDoEspecial("Deadly Bite");
-		mago.setVida(600);
+		
+                
 		JOptionPane.showMessageDialog(null,
 				mago.getNome() + "\n" + "Classe: " + mago.getClasse() + "\n" + "Tipo de Dano: " + mago.getTipo() + "\n"
 						+ "Vida: " + mago.getVida() + "\n" + "Ataque: " + mago.getAtaque() + "\n" + "Defesa: "
@@ -91,7 +98,6 @@ public class EscolhaPersonagem {
 			Object[] golpesDoHeroi = { mago.getNomeGolpePrimario(), mago.getNomeGolpeSecundario(),
 					mago.getNomeDoEspecial() };
 			Object[] golpesDoHeroiSEspecial = { mago.getNomeGolpePrimario(), mago.getNomeGolpeSecundario() };
-			
 			if (countH >= 2) {
 				habilidade = JOptionPane.showOptionDialog(null, "Selecione o ataque:", "Usar o golpe",
 						JOptionPane.DEFAULT_OPTION, 3, null, golpesDoHeroi, golpesDoHeroi[0]);
@@ -99,11 +105,11 @@ public class EscolhaPersonagem {
 				habilidade = JOptionPane.showOptionDialog(null, "Selecione o ataque:", "Usar o golpe",
 						JOptionPane.DEFAULT_OPTION, 3, null, golpesDoHeroiSEspecial, golpesDoHeroiSEspecial[0]);
 			}
-			
-			if (habilidade == 0) { // Comparação: se a habilidade selecionada for o golpe primário.
-				JOptionPane.showMessageDialog(null, mago.getNomeGolpePrimario());
+			if (habilidade == 0) { // Comparação: se a habilidade selecionada
+									// for o golpe primário.
 				mago.golpePrimarioHeroi(dragon.getVida(), dragon.getAtaque(), dragon.getDefesa(),
-						mago.getDanoGolpePrimario()); // alterado porque estava
+						mago.getDanoGolpePrimario());
+                                
 														// "dano do especial"
 				// Comparação: se a habilidade selecionada for o Golpe Primário.
 				countH++;// contador para disponibilizar o uso do poder
@@ -111,13 +117,11 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 1) {
 				// Comparação: se a habilidade selecionada for o golpe
 				// secundário.
-				JOptionPane.showMessageDialog(null, mago.getNomeGolpeSecundario());
 				mago.golpeSecundarioHeroi(dragon.getVida(), mago.getAtaque(), mago.getDefesa(),
 						mago.getDanoDoGolpeSecundario()); // Se aplica o método Golpe Secundário() - alterado porque estava "dano do especial"
 				countH++;
 			} else if (habilidade == 2) { // Comparação: se a habilidade
 											// selecionada for Golpe Especial.
-				JOptionPane.showMessageDialog(null, mago.getNomeDoEspecial());
 				mago.golpeEspecialHeroi(mago.getVida(), dragon.getVida(), mago.getAtaque(), dragon.getDefesa(),
 						mago.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -140,7 +144,6 @@ public class EscolhaPersonagem {
 			JOptionPane.showMessageDialog(null, "Eu invoco...");
 			// Gambiarra para usar try Catch
 			i = rand.nextInt(3);
-			
 			if (countM > 4) {
 				switch (i) {
 				// Se countM for maior que 4, o valor de 'i' será verificado
@@ -150,21 +153,21 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpePrimario());
 					// Printar o ataque primário
 					dragon.golpePrimarioMonstro(mago.getVida(), dragon.getAtaque(), mago.getDefesa(),
-							dragon.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoGolpePrimario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					dragon.golpeSecundarioMonstro(mago.getVida(), dragon.getAtaque(), mago.getDefesa(),
-							dragon.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoDoGolpeSecundario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, dragon.getNomeDoEspecial());
 					// Printar o ataque Especial
 					dragon.golpeEspecialMonstro(mago.getVida(), dragon.getAtaque(), mago.getDefesa(),
-							dragon.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoDoEspecial(), dragon.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0; // alterado para que o contador zere sempre que
 								// o especial for utilizado
@@ -183,14 +186,14 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpePrimario());
 					// Printar o ataque primário
 					dragon.golpePrimarioMonstro(mago.getVida(), dragon.getAtaque(), mago.getDefesa(),
-							dragon.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoGolpePrimario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					dragon.golpeSecundarioMonstro(mago.getVida(), dragon.getAtaque(), mago.getDefesa(),
-							dragon.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoDoGolpeSecundario(), dragon.getMultiplicadorDeDano());
 					countM++;
 				}
 			}
@@ -221,7 +224,7 @@ public class EscolhaPersonagem {
 							+ mago.getDefesa() + "\n" + "Vida: " + mago.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + dragon.getNome() + "\n"
 							+ "Vida: " + dragon.getVida());
-			//JOptionPane.showMessageDialog(null, dragon.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, dragon.getMensagemDeVitoria());
 			JOptionPane.showMessageDialog(null, "Bônus de Vitória:" + "\n" + "+X% da vida perdida");
 			// Determinar o quanto de atributos que irá acrescentar ao valor
 			// inicial
@@ -235,7 +238,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + dragon.getNome() + "n" + "Vida: " + dragon.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + dragon.getNome() + "\n"
 							+ "Vida: " + dragon.getVida());
-			//JOptionPane.showMessageDialog(null, dragon.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, dragon.getMensagemDeDerrota());
 			// printar frase de derrota do oponente
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3, null,
@@ -267,7 +270,6 @@ public class EscolhaPersonagem {
 			Object[] golpesDoHeroi = { mago.getNomeGolpePrimario(), mago.getNomeGolpeSecundario(),
 					mago.getNomeDoEspecial() };
 			Object[] golpesDoHeroiSEspecial = { mago.getNomeGolpePrimario(), mago.getNomeGolpeSecundario() };
-			
 			if (countH >= 2) {
 				habilidade = JOptionPane.showOptionDialog(null, "Selecione o ataque:", "Usar o golpe",
 						JOptionPane.DEFAULT_OPTION, 3, null, golpesDoHeroi, golpesDoHeroi[0]);
@@ -275,10 +277,8 @@ public class EscolhaPersonagem {
 				habilidade = JOptionPane.showOptionDialog(null, "Selecione o ataque:", "Usar o golpe",
 						JOptionPane.DEFAULT_OPTION, 3, null, golpesDoHeroiSEspecial, golpesDoHeroiSEspecial[0]);
 			}
-			
 			if (habilidade == 0) { // Comparação: se a habilidade selecionada
 									// for o golpe primário.
-				JOptionPane.showMessageDialog(null, mago.getNomeGolpePrimario());
 				mago.golpePrimarioHeroi(gigante.getVida(), gigante.getAtaque(), gigante.getDefesa(),
 						mago.getDanoGolpePrimario());
 				// Comparação: se a habilidade selecionada for o Golpe Primário.
@@ -287,15 +287,13 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 1) {
 				// Comparação: se a habilidade selecionada for o golpe
 				// secundário.
-				JOptionPane.showMessageDialog(null, mago.getNomeGolpeSecundario());
 				mago.golpeSecundarioHeroi(gigante.getVida(), mago.getAtaque(), mago.getDefesa(),
 						mago.getDanoDoGolpeSecundario()); // Se aplica o método
 															// Golpe
 															// Secundário()
 				countH++;
 			} else if (habilidade == 2) { //// Comparação: se a habilidade
-											//// selecionada for Golpe Especial
-				JOptionPane.showMessageDialog(null, mago.getNomeDoEspecial());
+											//// selecionada for Golpe Especial.
 				mago.golpeEspecialHeroi(mago.getVida(), gigante.getVida(), mago.getAtaque(), gigante.getDefesa(),
 						mago.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -327,21 +325,21 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpePrimario());
 					// Printar o ataque primário
 					gigante.golpePrimarioMonstro(mago.getVida(), gigante.getAtaque(), mago.getDefesa(),
-							gigante.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoGolpePrimario(), gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					gigante.golpeSecundarioMonstro(mago.getVida(), gigante.getAtaque(), mago.getDefesa(),
-							gigante.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoDoGolpeSecundario(), gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, gigante.getNomeDoEspecial());
 					// Printar o ataque Especial
 					gigante.golpeEspecialMonstro(mago.getVida(), gigante.getAtaque(), mago.getDefesa(),
-							gigante.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoDoEspecial(), gigante.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -358,15 +356,11 @@ public class EscolhaPersonagem {
 				case 0:
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpePrimario());
 					// Printar o ataque primário
-					gigante.golpePrimarioMonstro(mago.getVida(), gigante.getAtaque(), mago.getDefesa(),
-							gigante.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpeSecundario());
-					// Printar o ataque Secundário
-					gigante.golpeSecundarioMonstro(mago.getVida(), gigante.getAtaque(), mago.getDefesa(),
-							gigante.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+					// Printar o ataque secundário
 					countM++;
 					break;
 				}
@@ -398,7 +392,7 @@ public class EscolhaPersonagem {
 							+ mago.getDefesa() + "\n" + "Vida: " + mago.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + gigante.getNome() + "\n"
 							+ "Vida: " + gigante.getVida());
-			//JOptionPane.showMessageDialog(null, gigante.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, gigante.getMensagemDeVitoria());
 			JOptionPane.showMessageDialog(null, "Bônus de Vitória:" + "\n" + "+X% da vida perdida");
 			// Determinar o quanto de atributos que irá acrescentar ao valor
 			// inicial
@@ -412,7 +406,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + gigante.getNome() + "n" + "Vida: " + gigante.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + mago.getNome() + "\n" + "Vida: "
 							+ mago.getVida());
-			//JOptionPane.showMessageDialog(null, gigante.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, gigante.getMensagemDeDerrota());
 			// printar frase de derrota do oponente
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3, null,
@@ -453,7 +447,6 @@ public class EscolhaPersonagem {
 			}
 			if (habilidade == 0) { // Comparação: se a habilidade selecionada
 									// for o golpe primário.
-				JOptionPane.showMessageDialog(null, mago.getNomeGolpePrimario());
 				mago.golpePrimarioHeroi(kraken.getVida(), kraken.getAtaque(), kraken.getDefesa(),
 						mago.getDanoDoEspecial());
 				// Comparação: se a habilidade selecionada for o Golpe Primário.
@@ -462,14 +455,12 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 1) {
 				// Comparação: se a habilidade selecionada for o golpe
 				// secundário.
-				JOptionPane.showMessageDialog(null, mago.getNomeGolpeSecundario());
 				mago.golpeSecundarioHeroi(kraken.getVida(), mago.getAtaque(), mago.getDefesa(),
 						mago.getDanoDoEspecial()); // Se aplica o método Golpe
 													// Secundário()
 				countH++;
 			} else if (habilidade == 2) { //// Comparação: se a habilidade
 											//// selecionada for Golpe Especial.
-				JOptionPane.showMessageDialog(null, mago.getNomeDoEspecial());
 				mago.golpeEspecialHeroi(mago.getVida(), kraken.getVida(), mago.getAtaque(), kraken.getDefesa(),
 						mago.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -501,21 +492,21 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpePrimario());
 					// Printar o ataque primário
 					kraken.golpePrimarioMonstro(mago.getVida(), kraken.getAtaque(), mago.getDefesa(),
-							kraken.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoGolpePrimario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					kraken.golpeSecundarioMonstro(mago.getVida(), kraken.getAtaque(), mago.getDefesa(),
-							kraken.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoDoGolpeSecundario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, kraken.getNomeDoEspecial());
 					// Printar o ataque Especial
 					kraken.golpeEspecialMonstro(mago.getVida(), kraken.getAtaque(), mago.getDefesa(),
-							kraken.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoDoEspecial(), kraken.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -533,14 +524,14 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpePrimario());
 					// Printar o ataque primário
 					kraken.golpePrimarioMonstro(mago.getVida(), kraken.getAtaque(), mago.getDefesa(),
-							kraken.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoGolpePrimario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					kraken.golpeSecundarioMonstro(mago.getVida(), kraken.getAtaque(), mago.getDefesa(),
-							kraken.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoDoGolpeSecundario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				}
@@ -572,7 +563,7 @@ public class EscolhaPersonagem {
 							+ mago.getDefesa() + "\n" + "Vida: " + mago.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + kraken.getNome() + "\n"
 							+ "Vida: " + kraken.getVida());
-			//JOptionPane.showMessageDialog(null, kraken.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, kraken.getMensagemDeVitoria());
 			// printar frase de vitória do oponente
 			JOptionPane.showMessageDialog(null, "Congratulations!");
 			JOptionPane.showMessageDialog(null,
@@ -585,7 +576,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + kraken.getNome() + "n" + "Vida: " + kraken.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + kraken.getNome() + "\n"
 							+ "Vida: " + kraken.getVida());
-			//JOptionPane.showMessageDialog(null, kraken.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, kraken.getMensagemDeDerrota());
 			// printar frase de derrota do oponente
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3, null,
@@ -597,29 +588,11 @@ public class EscolhaPersonagem {
 			}
 		}
 		return 2;
+		}
+		return 1;
 	}
 
 	public int guerreiro() {
-		Object[] dificuldade = { "Iniciante", "Intermediário", "Avançado", "Expert", "Impossible" };
-		nivelDeDificuldade = JOptionPane.showOptionDialog(null, "Selecione o nível de dificuldade: ", "Nível: ",
-				JOptionPane.DEFAULT_OPTION, 3, null, dificuldade, dificuldade[0]);
-		switch (nivelDeDificuldade) {
-		case 0:
-			monstros.setMultiplicadorDeDano(1.0);
-			break;
-		case 1:
-			monstros.setMultiplicadorDeDano(1.20);
-			break;
-		case 2:
-			monstros.setMultiplicadorDeDano(1.45);
-			break;
-		case 3:	
-			monstros.setMultiplicadorDeDano(1.80);
-			break;
-		case 4:
-			monstros.setMultiplicadorDeDano(2.0);
-			break;
-		}
 		
 		Random rand = new Random();
 		Monstros dragon = new Dragao(); // Criando o objeto Dragão
@@ -631,13 +604,34 @@ public class EscolhaPersonagem {
 		gigante.setDefesa(rand.nextInt(20) + 5); // valor randomico para a defesa do gigante (alterado)
 		kraken.setAtaque(rand.nextInt(25) + 5); // valor randomico para o ataque do bomba (alterado)
 		kraken.setDefesa(rand.nextInt(25) + 5); // valor randomico para a defesa do bomba (alterado)
-		dragon.setVida(600);
-		gigante.setVida(700);
-		kraken.setVida(800);
+		dragon.setVida(60);
+		gigante.setVida(70);
+		kraken.setVida(80);
+                
+                dragon.setNomeGolpePrimario("Fire Ball");	
+                dragon.setDanoGolpePrimario(rand.nextInt(15)+5);
+                dragon.setNomeGolpeSecundario("Burning Flame");
+                dragon.setDanoDoGolpeSecundario(rand.nextInt(15)+5);
+                dragon.setNomeDoEspecial("Hell Fire");
+                dragon.setDanoDoEspecial(rand.nextInt(15)+15);
+                
+                gigante.setNomeGolpePrimario("Smash");	
+                gigante.setDanoGolpePrimario(rand.nextInt(20)+10);
+                gigante.setNomeGolpeSecundario("Tread");
+                gigante.setDanoDoGolpeSecundario(rand.nextInt(20)+10);
+                gigante.setNomeDoEspecial("Earth Shake");
+                gigante.setDanoDoEspecial(rand.nextInt(20)+25);
+                
+                kraken.setNomeGolpePrimario("Hit");	
+                kraken.setDanoGolpePrimario(rand.nextInt(20)+15);
+                kraken.setNomeGolpeSecundario("Drown");
+                kraken.setDanoDoGolpeSecundario(rand.nextInt(20)+15);
+                kraken.setNomeDoEspecial("Sink Down");
+                kraken.setDanoDoEspecial(rand.nextInt(20)+35);
 
 		Guerreiro guerreiro = new Guerreiro();
 		guerreiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
-		
+		guerreiro.setVida(40);
 		while(true){
 			if(novoPersonagem){
 				break;
@@ -648,12 +642,13 @@ public class EscolhaPersonagem {
 		guerreiro.setAtaque(rand.nextInt(30) + 15); // valor randomico para o ataque do mago
 		guerreiro.setDefesa(rand.nextInt(15) + 5); // valor randomico para a defesa do mago
 		guerreiro.setDanoGolpePrimario(rand.nextInt(25) + 5);
-		guerreiro.setDanoGolpePrimario(rand.nextInt(30) + 7);
+		guerreiro.setDanoDoGolpeSecundario(rand.nextInt(30) + 7);
 		guerreiro.setDanoDoEspecial(rand.nextInt(35) + 10);
 		guerreiro.setNomeGolpePrimario("Normal Blade");
 		guerreiro.setNomeGolpeSecundario("Shikai");
 		guerreiro.setNomeDoEspecial("Bankai");
-		guerreiro.setVida(400);
+		
+                
 		JOptionPane.showMessageDialog(null, guerreiro.getNome() + "\n" + "Classe: " + guerreiro.getClasse()
 				+ "\n" + "Tipo de Dano: " + guerreiro.getTipo() + "\n" + "Vida: " + guerreiro.getVida() + "\n"
 				+ "Ataque: " + guerreiro.getAtaque() + "\n" + "Defesa: " + guerreiro.getDefesa() + "\n"
@@ -683,7 +678,6 @@ public class EscolhaPersonagem {
 			}
 			if (habilidade == 0) { // Comparação: se a habilidade
 									// selecionada for o golpe primário.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeGolpePrimario());
 				guerreiro.golpePrimarioHeroi(dragon.getVida(), guerreiro.getAtaque(), dragon.getDefesa(),
 						guerreiro.getDanoGolpePrimario());
 				// Comparação: se a habilidade selecionada for o Golpe
@@ -693,7 +687,6 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 1) {
 				//// Comparação: se a habilidade selecionada for o golpe
 				//// secundário.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeGolpeSecundario());
 				guerreiro.golpeSecundarioHeroi(dragon.getVida(), guerreiro.getAtaque(), dragon.getDefesa(),
 						guerreiro.getDanoDoGolpeSecundario()); // Se
 																// aplica
@@ -705,7 +698,6 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 2) { //// Comparação: se a
 											//// habilidade selecionada
 											//// for Golpe Especial.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeDoEspecial());
 				guerreiro.golpeEspecialHeroi(guerreiro.getVida(), dragon.getVida(), guerreiro.getAtaque(),
 						dragon.getDefesa(), guerreiro.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -737,22 +729,22 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpePrimario());
 					// Printar o ataque primário
 					dragon.golpePrimarioMonstro(guerreiro.getVida(), dragon.getAtaque(), guerreiro.getDefesa(),
-							dragon.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoGolpePrimario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					dragon.golpeSecundarioMonstro(guerreiro.getVida(), dragon.getAtaque(),
-							guerreiro.getDefesa(), guerreiro.getDanoDoGolpeSecundario(),
-							monstros.getMultiplicadorDeDano());
+							guerreiro.getDefesa(), dragon.getDanoDoGolpeSecundario(),
+							dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, dragon.getNomeDoEspecial());
 					// Printar o ataque Especial
 					dragon.golpeEspecialMonstro(guerreiro.getVida(), dragon.getAtaque(), guerreiro.getDefesa(),
-							dragon.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoDoEspecial(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				}
@@ -769,7 +761,7 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpePrimario());
 					// Printar o ataque primário
 					dragon.golpePrimarioMonstro(guerreiro.getVida(), dragon.getAtaque(), guerreiro.getDefesa(),
-							dragon.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoGolpePrimario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
@@ -777,7 +769,7 @@ public class EscolhaPersonagem {
 					// Printar o ataque Secundário
 					dragon.golpeSecundarioMonstro(guerreiro.getVida(), dragon.getAtaque(),
 							guerreiro.getDefesa(), dragon.getDanoDoGolpeSecundario(),
-							monstros.getMultiplicadorDeDano());
+							dragon.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -810,7 +802,7 @@ public class EscolhaPersonagem {
 							+ "Defesa: " + guerreiro.getDefesa() + "\n" + "Vida: " + guerreiro.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + dragon.getNome() + "\n"
 							+ "Vida: " + dragon.getVida());
-			//JOptionPane.showMessageDialog(null, dragon.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, dragon.getMensagemDeVitoria());
 			// printar frase de vitória do oponente
 			JOptionPane.showMessageDialog(null, "Parabéns!! \nPróxima fase: " + gigante.getNome());
 			JOptionPane.showMessageDialog(null, "Bônus de Vitória:" + "\n" + "+X% da vida perdida");
@@ -824,7 +816,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + dragon.getNome() + "n" + "Vida: " + dragon.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + dragon.getNome() + "\n"
 							+ "Vida: " + dragon.getVida());
-			//JOptionPane.showMessageDialog(null, dragon.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, dragon.getMensagemDeDerrota());
 			// printar frase de derrota do oponente
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3,
@@ -865,7 +857,6 @@ public class EscolhaPersonagem {
 			}
 			if (habilidade == 0) { // Comparação: se a habilidade
 									// selecionada for o golpe primário.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeGolpePrimario());
 				guerreiro.golpePrimarioHeroi(gigante.getVida(), guerreiro.getAtaque(), gigante.getDefesa(),
 						guerreiro.getDanoDoEspecial());
 				// Comparação: se a habilidade selecionada for o Golpe
@@ -875,7 +866,6 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 1) {
 				//// Comparação: se a habilidade selecionada for o golpe
 				//// secundário.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeGolpeSecundario());
 				guerreiro.golpeSecundarioHeroi(gigante.getVida(), guerreiro.getAtaque(), gigante.getDefesa(),
 						guerreiro.getDanoDoEspecial()); // Se aplica o
 														// método Golpe
@@ -884,7 +874,6 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 2) { //// Comparação: se a
 											//// habilidade selecionada
 											//// for Golpe Especial.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeDoEspecial());
 				guerreiro.golpeEspecialHeroi(guerreiro.getVida(), gigante.getVida(), guerreiro.getAtaque(),
 						gigante.getDefesa(), guerreiro.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -917,7 +906,7 @@ public class EscolhaPersonagem {
 					// Printar o ataque primário
 					gigante.golpePrimarioMonstro(guerreiro.getVida(), gigante.getAtaque(),
 							guerreiro.getDefesa(), gigante.getDanoGolpePrimario(),
-							monstros.getMultiplicadorDeDano());
+							gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
@@ -925,7 +914,7 @@ public class EscolhaPersonagem {
 					// Printar o ataque Secundário
 					gigante.golpeSecundarioMonstro(guerreiro.getVida(), gigante.getAtaque(),
 							guerreiro.getDefesa(), gigante.getDanoDoGolpeSecundario(),
-							monstros.getMultiplicadorDeDano());
+							gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
@@ -933,7 +922,7 @@ public class EscolhaPersonagem {
 					// Printar o ataque Especial
 					gigante.golpeEspecialMonstro(guerreiro.getVida(), gigante.getAtaque(),
 							guerreiro.getDefesa(), gigante.getDanoDoEspecial(),
-							monstros.getMultiplicadorDeDano());
+							gigante.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -949,7 +938,7 @@ public class EscolhaPersonagem {
 					// Printar o ataque primário
 					gigante.golpePrimarioMonstro(guerreiro.getVida(), gigante.getAtaque(),
 							guerreiro.getDefesa(), gigante.getDanoGolpePrimario(),
-							monstros.getMultiplicadorDeDano());
+							gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
@@ -957,7 +946,7 @@ public class EscolhaPersonagem {
 					// Printar o ataque Secundário
 					gigante.golpeSecundarioMonstro(guerreiro.getVida(), gigante.getAtaque(),
 							guerreiro.getDefesa(), gigante.getDanoDoGolpeSecundario(),
-							monstros.getMultiplicadorDeDano());
+							gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				}
@@ -989,7 +978,7 @@ public class EscolhaPersonagem {
 							+ "Defesa: " + guerreiro.getDefesa() + "\n" + "Vida: " + guerreiro.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + gigante.getNome() + "\n"
 							+ "Vida: " + gigante.getVida());
-			//JOptionPane.showMessageDialog(null, gigante.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, gigante.getMensagemDeVitoria());
 			JOptionPane.showMessageDialog(null, "Bônus de Vitória:" + "\n" + "+X% da vida perdida");
 			// Determinar o quanto de atributos que irá acrescentar ao
 			// valor inicial
@@ -1003,7 +992,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + gigante.getNome() + "n" + "Vida: " + gigante.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + gigante.getNome() + "\n"
 							+ "Vida: " + gigante.getVida());
-			//JOptionPane.showMessageDialog(null, gigante.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, gigante.getMensagemDeDerrota());
 			// printar frase de derrota do oponente.
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3,
@@ -1044,7 +1033,6 @@ public class EscolhaPersonagem {
 			}
 			if (habilidade == 0) { // Comparação: se a habilidade
 									// selecionada for o golpe primário.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeGolpePrimario());
 				guerreiro.golpePrimarioHeroi(kraken.getVida(), guerreiro.getAtaque(), kraken.getDefesa(),
 						guerreiro.getDanoGolpePrimario());
 				// Comparação: se a habilidade selecionada for o Golpe
@@ -1054,7 +1042,6 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 1) {
 				//// Comparação: se a habilidade selecionada for o golpe
 				//// secundário.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeGolpeSecundario());
 				guerreiro.golpeSecundarioHeroi(kraken.getVida(), guerreiro.getAtaque(), kraken.getDefesa(),
 						guerreiro.getDanoDoGolpeSecundario()); // Se
 																// aplica
@@ -1066,7 +1053,6 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 2) { //// Comparação: se a
 											//// habilidade selecionada
 											//// for Golpe Especial.
-				JOptionPane.showMessageDialog(null, guerreiro.getNomeDoEspecial());
 				guerreiro.golpeEspecialHeroi(guerreiro.getVida(), kraken.getVida(), guerreiro.getAtaque(),
 						kraken.getDefesa(), guerreiro.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -1098,7 +1084,7 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpePrimario());
 					// Printar o ataque primário
 					kraken.golpePrimarioMonstro(guerreiro.getVida(), kraken.getAtaque(), guerreiro.getDefesa(),
-							kraken.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoGolpePrimario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
@@ -1106,14 +1092,14 @@ public class EscolhaPersonagem {
 					// Printar o ataque Secundário
 					kraken.golpeSecundarioMonstro(guerreiro.getVida(), kraken.getAtaque(),
 							guerreiro.getDefesa(), kraken.getDanoDoGolpeSecundario(),
-							monstros.getMultiplicadorDeDano());
+							kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, kraken.getNomeDoEspecial());
 					// Printar o ataque Especial
 					kraken.golpeEspecialMonstro(guerreiro.getVida(), kraken.getAtaque(), guerreiro.getDefesa(),
-							kraken.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoDoEspecial(), kraken.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -1131,7 +1117,7 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpePrimario());
 					// Printar o ataque primário
 					kraken.golpePrimarioMonstro(guerreiro.getVida(), kraken.getAtaque(), guerreiro.getDefesa(),
-							kraken.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoGolpePrimario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
@@ -1139,7 +1125,7 @@ public class EscolhaPersonagem {
 					// Printar o ataque Secundário
 					kraken.golpeSecundarioMonstro(guerreiro.getVida(), kraken.getAtaque(),
 							guerreiro.getDefesa(), kraken.getDanoDoGolpeSecundario(),
-							monstros.getMultiplicadorDeDano());
+							kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				}
@@ -1171,7 +1157,7 @@ public class EscolhaPersonagem {
 							+ "Defesa: " + guerreiro.getDefesa() + "\n" + "Vida: " + guerreiro.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + kraken.getNome() + "\n"
 							+ "Vida: " + kraken.getVida());
-			//JOptionPane.showMessageDialog(null, kraken.getMensagemDeVitoria()); // printar
+			JOptionPane.showMessageDialog(null, kraken.getMensagemDeVitoria()); // printar
 																				// frase
 																				// de
 																				// vitória
@@ -1187,7 +1173,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + kraken.getNome() + "n" + "Vida: " + kraken.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + kraken.getNome() + "\n"
 							+ "Vida: " + kraken.getVida());
-			//JOptionPane.showMessageDialog(null, kraken.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, kraken.getMensagemDeDerrota());
 			// printar frase de derrota do oponente
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3,
@@ -1205,27 +1191,6 @@ public class EscolhaPersonagem {
 
 	public int arqueiro() {
 
-		Object[] dificuldade = { "Iniciante", "Intermediário", "Avançado", "Expert", "Impossible" };
-		nivelDeDificuldade = JOptionPane.showOptionDialog(null, "Selecione o nível de dificuldade: ", "Nível: ",
-				JOptionPane.DEFAULT_OPTION, 3, null, dificuldade, dificuldade[0]);
-		switch (nivelDeDificuldade) {
-		case 0:
-			monstros.setMultiplicadorDeDano(1.0);
-			break;
-		case 1:
-			monstros.setMultiplicadorDeDano(1.20);
-			break;
-		case 2:
-			monstros.setMultiplicadorDeDano(1.45);
-			break;
-		case 3:	
-			monstros.setMultiplicadorDeDano(1.80);
-			break;
-		case 4:
-			monstros.setMultiplicadorDeDano(2.0);
-			break;
-		}
-		
 		Random rand = new Random();
 		Monstros dragon = new Dragao(); // Criando o objeto Dragão
 		Monstros gigante = new Gigante(); // Criando o objeto Gigante
@@ -1236,11 +1201,33 @@ public class EscolhaPersonagem {
 		gigante.setDefesa(rand.nextInt(20) + 5); // valor randomico para a defesa do gigante (alterado)
 		kraken.setAtaque(rand.nextInt(25) + 5); // valor randomico para o ataque do bomba (alterado)
 		kraken.setDefesa(rand.nextInt(25) + 5); // valor randomico para a defesa do bomba (alterado)
-		dragon.setVida(600);
-		gigante.setVida(700);
-		kraken.setVida(800);
+		dragon.setVida(60);
+		gigante.setVida(70);
+		kraken.setVida(80);
+                
+                dragon.setNomeGolpePrimario("Fire Ball");	
+                dragon.setDanoGolpePrimario(rand.nextInt(15)+5);
+                dragon.setNomeGolpeSecundario("Burning Flame");
+                dragon.setDanoDoGolpeSecundario(rand.nextInt(15)+5);
+                dragon.setNomeDoEspecial("Hell Fire");
+                dragon.setDanoDoEspecial(rand.nextInt(15)+15);
+                
+                gigante.setNomeGolpePrimario("Smash");	
+                gigante.setDanoGolpePrimario(rand.nextInt(20)+10);
+                gigante.setNomeGolpeSecundario("Tread");
+                gigante.setDanoDoGolpeSecundario(rand.nextInt(20)+10);
+                gigante.setNomeDoEspecial("Earth Shake");
+                gigante.setDanoDoEspecial(rand.nextInt(20)+25);
+                
+                kraken.setNomeGolpePrimario("Hit");	
+                kraken.setDanoGolpePrimario(rand.nextInt(20)+15);
+                kraken.setNomeGolpeSecundario("Drown");
+                kraken.setDanoDoGolpeSecundario(rand.nextInt(20)+15);
+                kraken.setNomeDoEspecial("Sink Down");
+                kraken.setDanoDoEspecial(rand.nextInt(20)+35);
 
 		Arqueiro arqueiro = new Arqueiro();
+                arqueiro.setVida(50);
 		arqueiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
 		while(true){
 			if(novoPersonagem){
@@ -1250,13 +1237,13 @@ public class EscolhaPersonagem {
 		arqueiro.setTipo("Physical Damage");// Denife o tipo de dano
 		arqueiro.setAtaque(rand.nextInt(20) + 10); // valor randomico para o ataque do mago
 		arqueiro.setDefesa(rand.nextInt(20) + 10); // valor randomico para a defesa do mago
-		arqueiro.setDanoGolpePrimario(rand.nextInt(20) + 10);
-		arqueiro.setDanoGolpePrimario(rand.nextInt(25) + 10);
+		arqueiro.setDanoGolpePrimario(rand.nextInt(20) + 5);
+		arqueiro.setDanoDoGolpeSecundario(rand.nextInt(25) + 5);
 		arqueiro.setDanoDoEspecial(rand.nextInt(30) + 10);
 		arqueiro.setNomeGolpePrimario("Stealth Shot");
 		arqueiro.setNomeGolpeSecundario("Poisoned arrow");
 		arqueiro.setNomeDoEspecial("Arrow Storm");
-		arqueiro.setVida(500);
+		
 		JOptionPane.showMessageDialog(null,
 				arqueiro.getNome() + "\n" + "Classe: " + arqueiro.getClasse() + "\n" + "Tipo de Dano: "
 						+ arqueiro.getTipo() + "\n" + "Vida: " + arqueiro.getVida() + "\n" + "Ataque: "
@@ -1287,7 +1274,6 @@ public class EscolhaPersonagem {
 			}
 			if (habilidade == 0) { // Comparação: se a habilidade selecionada
 									// for o golpe primário.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeGolpePrimario());
 				arqueiro.golpePrimarioHeroi(dragon.getVida(), arqueiro.getAtaque(), dragon.getDefesa(),
 						arqueiro.getDanoGolpePrimario());
 				// Comparação: se a habilidade selecionada for o Golpe Primário.
@@ -1296,7 +1282,6 @@ public class EscolhaPersonagem {
 			} else if (habilidade == 1) { //// Comparação: se a habilidade
 											//// selecionada for o golpe
 											//// secundário.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeGolpeSecundario());
 				arqueiro.golpeSecundarioHeroi(dragon.getVida(), arqueiro.getAtaque(), dragon.getDefesa(),
 						arqueiro.getDanoDoGolpeSecundario()); // Se aplica o
 																// método Golpe
@@ -1304,7 +1289,6 @@ public class EscolhaPersonagem {
 				countH++;
 			} else if (habilidade == 2) { //// Comparação: se a habilidade
 											//// selecionada for Golpe Especial.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeDoEspecial());
 				arqueiro.golpeEspecialHeroi(arqueiro.getVida(), dragon.getVida(), arqueiro.getAtaque(),
 						dragon.getDefesa(), arqueiro.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -1336,21 +1320,21 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpePrimario());
 					// Printar o ataque primário
 					dragon.golpePrimarioMonstro(arqueiro.getVida(), dragon.getAtaque(), arqueiro.getDefesa(),
-							dragon.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoGolpePrimario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					dragon.golpeSecundarioMonstro(arqueiro.getVida(), dragon.getAtaque(), arqueiro.getDefesa(),
-							dragon.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoDoGolpeSecundario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, dragon.getNomeDoEspecial());
 					// Printar o ataque Especial
 					dragon.golpeEspecialMonstro(arqueiro.getVida(), dragon.getAtaque(), arqueiro.getDefesa(),
-							dragon.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoDoEspecial(), dragon.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -1368,14 +1352,14 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpePrimario());
 					// Printar o ataque primário
 					dragon.golpePrimarioMonstro(arqueiro.getVida(), dragon.getAtaque(), arqueiro.getDefesa(),
-							dragon.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoGolpePrimario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, dragon.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					dragon.golpeSecundarioMonstro(arqueiro.getVida(), dragon.getAtaque(), arqueiro.getDefesa(),
-							dragon.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							dragon.getDanoDoGolpeSecundario(), dragon.getMultiplicadorDeDano());
 					countM++;
 					break;
 				}
@@ -1407,7 +1391,7 @@ public class EscolhaPersonagem {
 							+ "Defesa: " + arqueiro.getDefesa() + "\n" + "Vida: " + arqueiro.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + dragon.getNome() + "\n"
 							+ "Vida: " + dragon.getVida());
-			//JOptionPane.showMessageDialog(null, dragon.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, dragon.getMensagemDeVitoria());
 			JOptionPane.showMessageDialog(null, "Bônus de Vitória:" + "\n" + "+X% da vida perdida");
 			// Determinar o quanto de atributos que irá acrescentar ao valor
 			// inicial
@@ -1421,7 +1405,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + dragon.getNome() + "n" + "Vida: " + dragon.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + dragon.getNome() + "\n"
 							+ "Vida: " + dragon.getVida());
-			//JOptionPane.showMessageDialog(null, dragon.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, dragon.getMensagemDeDerrota());
 			// printar frase de derrota do oponente
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3, null,
@@ -1461,19 +1445,23 @@ public class EscolhaPersonagem {
 				habilidade = JOptionPane.showOptionDialog(null, "Selecione o ataque:", "Usar o golpe",
 						JOptionPane.DEFAULT_OPTION, 3, null, golpesDoHeroiEspecial, golpesDoHeroiEspecial[0]);
 			}
-			if (habilidade == 0) { // Comparação: se a habilidade selecionada for o golpe primário.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeGolpePrimario());
+			if (habilidade == 0) { // Comparação: se a habilidade selecionada
+									// for o golpe primário.
 				arqueiro.golpePrimarioHeroi(gigante.getVida(), arqueiro.getAtaque(), gigante.getDefesa(),
 						arqueiro.getDanoGolpePrimario());
 				// Comparação: se a habilidade selecionada for o Golpe Primário.
-				countH++;// contador para disponibilizar o uso do poder especial.
-			} else if (habilidade == 1) { //// Comparação: se a habilidade selecionada for o golpe secundário.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeGolpeSecundario());
+				countH++;// contador para disponibilizar o uso do poder
+							// especial.
+			} else if (habilidade == 1) { //// Comparação: se a habilidade
+											//// selecionada for o golpe
+											//// secundário.
 				arqueiro.golpeSecundarioHeroi(gigante.getVida(), arqueiro.getAtaque(), gigante.getDefesa(),
-						arqueiro.getDanoDoGolpeSecundario()); // Se aplica o método Golpe Secundário()
+						arqueiro.getDanoDoGolpeSecundario()); // Se aplica o
+																// método Golpe
+																// Secundário()
 				countH++;
-			} else if (habilidade == 2) { //// Comparação: se a habilidade selecionada for Golpe Especial.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeDoEspecial());
+			} else if (habilidade == 2) { //// Comparação: se a habilidade
+											//// selecionada for Golpe Especial.
 				arqueiro.golpeEspecialHeroi(arqueiro.getVida(), gigante.getVida(), arqueiro.getAtaque(),
 						gigante.getDefesa(), arqueiro.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -1505,21 +1493,21 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpePrimario());
 					// Printar o ataque primário
 					gigante.golpePrimarioMonstro(arqueiro.getVida(), gigante.getAtaque(), arqueiro.getDefesa(),
-							gigante.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoGolpePrimario(), gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					gigante.golpeSecundarioMonstro(arqueiro.getVida(), gigante.getAtaque(), arqueiro.getDefesa(),
-							gigante.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoDoGolpeSecundario(), gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, gigante.getNomeDoEspecial());
 					// Printar o ataque Especial
 					gigante.golpeEspecialMonstro(arqueiro.getVida(), gigante.getAtaque(), arqueiro.getDefesa(),
-							gigante.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoDoEspecial(), gigante.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -1537,14 +1525,14 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpePrimario());
 					// Printar o ataque primário
 					gigante.golpePrimarioMonstro(arqueiro.getVida(), gigante.getAtaque(), arqueiro.getDefesa(),
-							gigante.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoGolpePrimario(), gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, gigante.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					gigante.golpeSecundarioMonstro(arqueiro.getVida(), gigante.getAtaque(), arqueiro.getDefesa(),
-							gigante.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							gigante.getDanoDoGolpeSecundario(), gigante.getMultiplicadorDeDano());
 					countM++;
 					break;
 				}
@@ -1577,7 +1565,7 @@ public class EscolhaPersonagem {
 							+ "Defesa: " + arqueiro.getDefesa() + "\n" + "Vida: " + arqueiro.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + gigante.getNome() + "\n"
 							+ "Vida: " + gigante.getVida());
-			//JOptionPane.showMessageDialog(null, gigante.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, gigante.getMensagemDeVitoria());
 			JOptionPane.showMessageDialog(null, "Bônus de Vitória:" + "\n" + "+X% da vida perdida");
 			// Determinar o quanto de atributos que irá acrescentar ao valor
 			// inicial
@@ -1587,10 +1575,11 @@ public class EscolhaPersonagem {
 		} else if (a == 0) { // se 'a' for igual a 0, printar o Monstro como
 								// Vencedor da batalha.
 			JOptionPane.showMessageDialog(null, "DERROTA!!");
-			JOptionPane.showMessageDialog(null, "Vencedor: " + gigante.getNome() + "n" + "Vida: "
-						+ gigante.getVida() + "\n" + "*******************************" + "\n"
-						+ "Perdedor: " + gigante.getNome() + "\n" + "Vida: " + gigante.getVida());
-			//JOptionPane.showMessageDialog(null, gigante.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null,
+					"Vencedor: " + gigante.getNome() + "n" + "Vida: " + gigante.getVida() + "\n"
+							+ "*******************************" + "\n" + "Perdedor: " + gigante.getNome() + "\n"
+							+ "Vida: " + gigante.getVida());
+			JOptionPane.showMessageDialog(null, gigante.getMensagemDeDerrota());
 			// printar frase de derrota do oponente.
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3, null,
@@ -1630,15 +1619,16 @@ public class EscolhaPersonagem {
 				habilidade = JOptionPane.showOptionDialog(null, "Selecione o ataque:", "Usar o golpe",
 						JOptionPane.DEFAULT_OPTION, 3, null, golpesDoHeroiEspecial, golpesDoHeroiEspecial[0]);
 			}
-			if (habilidade == 0) { // Comparação: se a habilidade selecionada // for o golpe primário.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeGolpePrimario());
+			if (habilidade == 0) { // Comparação: se a habilidade selecionada
+									// for o golpe primário.
 				arqueiro.golpePrimarioHeroi(kraken.getVida(), arqueiro.getAtaque(), kraken.getDefesa(),
 						arqueiro.getDanoGolpePrimario());
 				// Comparação: se a habilidade selecionada for o Golpe Primário.
 				countH++;// contador para disponibilizar o uso do poder
 							// especial.
-			} else if (habilidade == 1) { //// Comparação: se a habilidade selecionada for o golpe secundário.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeGolpeSecundario());
+			} else if (habilidade == 1) { //// Comparação: se a habilidade
+											//// selecionada for o golpe
+											//// secundário.
 				arqueiro.golpeSecundarioHeroi(kraken.getVida(), arqueiro.getAtaque(), kraken.getDefesa(),
 						arqueiro.getDanoDoGolpeSecundario()); // Se aplica o
 																// método Golpe
@@ -1646,7 +1636,6 @@ public class EscolhaPersonagem {
 				countH++;
 			} else if (habilidade == 2) { //// Comparação: se a habilidade
 											//// selecionada for Golpe Especial.
-				JOptionPane.showMessageDialog(null, arqueiro.getNomeDoEspecial());
 				arqueiro.golpeEspecialHeroi(arqueiro.getVida(), kraken.getVida(), arqueiro.getAtaque(),
 						kraken.getDefesa(), arqueiro.getDanoDoEspecial());
 				// Aplica-se o método Golpe Especial.
@@ -1679,21 +1668,21 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpePrimario());
 					// Printar o ataque primário
 					kraken.golpePrimarioMonstro(arqueiro.getVida(), kraken.getAtaque(), arqueiro.getDefesa(),
-							kraken.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoGolpePrimario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					kraken.golpeSecundarioMonstro(arqueiro.getVida(), kraken.getAtaque(), arqueiro.getDefesa(),
-							kraken.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoDoGolpeSecundario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 2:
 					JOptionPane.showMessageDialog(null, kraken.getNomeDoEspecial());
 					// Printar o ataque Especial
 					kraken.golpeEspecialMonstro(arqueiro.getVida(), kraken.getAtaque(), arqueiro.getDefesa(),
-							kraken.getDanoDoEspecial(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoDoEspecial(), kraken.getMultiplicadorDeDano());
 					// countM++;
 					countM = 0;
 					break;
@@ -1711,14 +1700,14 @@ public class EscolhaPersonagem {
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpePrimario());
 					// Printar o ataque primário
 					kraken.golpePrimarioMonstro(arqueiro.getVida(), kraken.getAtaque(), arqueiro.getDefesa(),
-							kraken.getDanoGolpePrimario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoGolpePrimario(), kraken.getMultiplicadorDeDano());
 					countM++;
 					break;
 				case 1:
 					JOptionPane.showMessageDialog(null, kraken.getNomeGolpeSecundario());
 					// Printar o ataque Secundário
 					kraken.golpeSecundarioMonstro(arqueiro.getVida(), kraken.getAtaque(), arqueiro.getDefesa(),
-							kraken.getDanoDoGolpeSecundario(), monstros.getMultiplicadorDeDano());
+							kraken.getDanoDoGolpeSecundario(), kraken.getMultiplicadorDeDano());
 					countM++;
 				}
 			}
@@ -1749,7 +1738,7 @@ public class EscolhaPersonagem {
 							+ "Defesa: " + arqueiro.getDefesa() + "\n" + "Vida: " + arqueiro.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + kraken.getNome() + "\n"
 							+ "Vida: " + kraken.getVida());
-			//JOptionPane.showMessageDialog(null, kraken.getMensagemDeVitoria());
+			JOptionPane.showMessageDialog(null, kraken.getMensagemDeVitoria());
 			// printar frase de vitória do oponente.
 			JOptionPane.showMessageDialog(null, "Congratulations");
 			JOptionPane.showMessageDialog(null,
@@ -1761,7 +1750,7 @@ public class EscolhaPersonagem {
 					"Vencedor: " + kraken.getNome() + "n" + "Vida: " + kraken.getVida() + "\n"
 							+ "*******************************" + "\n" + "Perdedor: " + kraken.getNome() + "\n"
 							+ "Vida: " + kraken.getVida());
-			//JOptionPane.showMessageDialog(null, kraken.getMensagemDeDerrota());
+			JOptionPane.showMessageDialog(null, kraken.getMensagemDeDerrota());
 			// printar frase de derrota do oponente.
 			Object[] tentarNovamente = { "Sim", "Desistir" };
 			option = JOptionPane.showOptionDialog(null, "E então?", "Novo jogo?", JOptionPane.DEFAULT_OPTION, 3, null,
@@ -1777,13 +1766,12 @@ public class EscolhaPersonagem {
 		return 1;
 	}
 }
-
 abstract class Personagem {
 	int ataque, defesa, vida;
+	String nome;
 	int golpePrimario; // habilidade primaria
 	int golpeSecundario; // habilidade secundaria
 	int golpeEspecial; // ultimate
-	String nome;
 	String nomeGolpePrimario = "s"; // nome da primeira habilidade
 	String nomeGolpeSecundario = "s"; // nome da segunda habilidade
 	String nomeDoEspecial = "s"; // nome da ultimate
@@ -1875,31 +1863,42 @@ abstract class Personagem {
 
 	public int golpePrimarioMonstro(int vidaDoInim, int danoDeAtaquePerso, int defesaInim, int danoPrimario,
 			double multDeDano) {
-		 
-		return 0; // a definir
+                int novavida = (int) (danoPrimario+(danoDeAtaquePerso-defesaInim)*multDeDano);
+                vidaDoInim = novavida;
+		return vidaDoInim; 
 	}
 	
 	public int golpeSecundarioMonstro(int vidaDoInimigo, int danoDeAtaquePerso, int defesaInim, int danoSecundario,
 			double multDeDano) {
-		return 0; // a definir
+		int novavida = (int) (danoSecundario+(danoDeAtaquePerso-defesaInim)*multDeDano);
+                vidaDoInimigo = novavida;
+		return vidaDoInimigo;
 	}	
 	
 	public int golpeEspecialMonstro(int vidaDoInimigo, int danoDeAtaquePerso, int defesaInim, int danoEspecial,
 			double multDeDano) {
-		return 0; // a definir
+		int novavida = (int) (danoEspecial+(danoDeAtaquePerso-defesaInim)*multDeDano);
+                vidaDoInimigo = novavida;
+		return vidaDoInimigo;
 	}	
 	
 	public int golpePrimarioHeroi(int vidaDoInim, int danoDeAtaquePerso, int defesaInim, int danoPrimario) {
-		return 0; // a definir
+		int novavida = (int) (danoPrimario*(danoDeAtaquePerso-defesaInim));
+                vidaDoInim = novavida;
+		return vidaDoInim;
 	}
 	
 	public int golpeSecundarioHeroi(int vidaDoPers, int danoDeAtaquePerso, int defesaInim, int danoSecundario) {
-		return 0; // a definir
+		int novavida = (int) (danoSecundario*(danoDeAtaquePerso-defesaInim));
+                vidaDoPers = novavida;
+		return vidaDoPers;
 	}
 
 	public int golpeEspecialHeroi(int vidaDoPers, int vidaDoInim, int danoDeAtaquePerso, int defesaInim,
 			int danoEspecial) {
-		return 0	; // a definir
+		int novavida = (int) (danoEspecial*(danoDeAtaquePerso-defesaInim));
+                vidaDoPers = novavida;
+		return vidaDoPers;
 	}	
 }	
 
@@ -1949,8 +1948,8 @@ class Guerreiro extends Herois {
 
 class Monstros extends Personagem {
 	private double multiplicadorDeDano;
-	private String mensagemDeVitoria = "";
-	private String mensagemDeDerrota = "";
+	private String mensagemDeVitoria = " ";
+	private String mensagemDeDerrota = " ";
 	
 	public double getMultiplicadorDeDano() {
 		return multiplicadorDeDano;
@@ -1993,10 +1992,11 @@ class Gigante extends Monstros {
 	}
 }
 
+
 class Kraken extends Monstros{
 	@Override
 	public String getMensagemDeVitoria(){
-		return "";
+		return "//frase de vitoria";
 	}
  
 	@Override
@@ -2004,3 +2004,4 @@ class Kraken extends Monstros{
 		return "//frase de vitoria";
 	}
 }
+
