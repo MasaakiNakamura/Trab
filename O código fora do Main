@@ -45,7 +45,7 @@ public class EscolhaPersonagem {
 		Monstros kraken = new Kraken(); // Criando o objeto Bomba
 		
 		dragon.setVida(600);
-		dragon.setAtaque(rand.nextInt(15) + 5555); // valor randomico para o ataque do dragão
+		dragon.setAtaque(rand.nextInt(15) + 5); // valor randomico para o ataque do dragão
 		dragon.setDefesa(rand.nextInt(15) + 5); // valor randomico para a defesa do dragão
 		dragon.setNomeGolpePrimario("Fire Ball");
 		dragon.setDanoGolpePrimario(rand.nextInt(15) + 5);
@@ -248,7 +248,7 @@ public class EscolhaPersonagem {
 				a = 1;
 				break; // Quebra o while(true)
 			}
-		} // FALTA IDENTAR
+		}
 
 		if (a == 1) { // se 'a' for igual a 1, printar o Herói como vencendor da
 						// batalha
