@@ -12,7 +12,7 @@ public class Prova {
 		EscolhaPersonagem guerreiro = new EscolhaPersonagem();
 		EscolhaPersonagem arqueiro = new EscolhaPersonagem();
 		boolean novoJogo = true; // variavel booleana para saber se o usuario deseja jogar um novo jogo, ou não
-		int fimDeJogo = 0; // Varialvel inteira para saber se o usuario dese reiniciar o jogo, apos morrer.
+		int fimDeJogo = 0; // Variavel inteira para saber se o usuario dese reiniciar o jogo, apos morrer.
 		int respostaNovoJogo; // Armazena a resposta "Iniciar Novo jogo", localizada no fim da Main
 		int escolha; // Variável interia para fazer comparações e saber qual herói o Jogador escolheu
 		
@@ -22,10 +22,7 @@ public class Prova {
 		while (novoJogo) {
 
 
-			if (novoJogo) {
-				JOptionPane.showMessageDialog(null, "Novo Jogo");
-			}
-			
+			JOptionPane.showMessageDialog(null, "Novo Jogo");
 			JOptionPane.showMessageDialog(null, "Vidas: 1");
 			JOptionPane.showMessageDialog(null, "Jogue com sabedoria...");
 			Object[] herois = { "Mage", "Guerreiro", "Arqueiro" };
@@ -36,11 +33,11 @@ public class Prova {
 				fimDeJogo = mago.mago();
 
 				if (fimDeJogo == 0) { //se o jogador desistiu
-					break;
+					novoJogo = true;
 				}
 				
 				if (fimDeJogo == 1) { //se o jogador morreu e quer continuar
-					novoJogo = true;
+					break;
 				}
 				
 				if(fimDeJogo == 2){ //se o jogador terminou o jogo
@@ -57,11 +54,11 @@ public class Prova {
 				fimDeJogo = guerreiro.guerreiro();
 
 				if (fimDeJogo == 0) { //se o jogador desistiu
-					break;
+					novoJogo = true;
 				}
 				
 				if (fimDeJogo == 1) { //se o jogador morreu e quer continuar
-					novoJogo = true;
+					break;
 				}
 				
 				if(fimDeJogo == 2){ //se o jogador terminou o jogo
@@ -78,11 +75,11 @@ public class Prova {
 				fimDeJogo = arqueiro.arqueiro();
 
 				if (fimDeJogo == 0) { //se o jogador desistiu
-					break;
+					novoJogo = true;
 				}
 				
 				if (fimDeJogo == 1) { //se o jogador morreu e quer continuar
-					novoJogo = true;
+					break;
 				}
 				
 				if(fimDeJogo == 2){ //se o jogador terminou o jogo
