@@ -20,6 +20,7 @@ public class EscolhaPersonagem {
 	int option; // Variável utilizada quando o personagem morre. Linha 198
 	int resposta0; // Parametro para saber se o jogador já possui uma conta.
 	int resposta1; // Parametro para saber se o jogador já possui uma conta.
+	boolean verificanome = true; // booleana para verificação de nome
 
 	public int mago() {
 
@@ -75,15 +76,31 @@ public class EscolhaPersonagem {
 		kraken.setDanoDoEspecial(rand.nextInt(20) + 35);
 
 		Mago mago = new Mago();
-		mago.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+		
+		while(verificanome){
+			try{
+				mago.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+				for(int i = 0; i < mago.getNome().length(); i++){
+					Character caractere = mago.getNome().charAt(i);
+					if(Character.isDigit(caractere)){
+						throw new Exception("Não pode conter numeros em nomes");
+					}
+				}
+				verificanome = false;
+			}
+			catch(Exception nf){
+				JOptionPane.showMessageDialog(null,"Entre apenas com letras!");
+			}
+		}
+		
 		mago.setClasse("Mago"); // Atribuição da Classe ao personagem
 		mago.setTipo("Magic Power"); // Atribuição do Tipo de personagem
 		mago.setVida(600);
 		mago.setAtaque(rand.nextInt(20) + 10); // valor randomico para o ataque do mago
 		mago.setDefesa(rand.nextInt(20) + 20); // valor randomico para a defesa do mago
-		mago.setDanoGolpePrimarioInicial(20);
-		mago.setDanoGolpeSecundarioInicial(25);// alterado pq estava "primario"
-		mago.setDanoDoEspecialInicial(35);
+		mago.setDanoGolpePrimarioInicial(25);
+		mago.setDanoGolpeSecundarioInicial(30);// alterado pq estava "primario"
+		mago.setDanoDoEspecialInicial(40);
 		mago.setNomeGolpePrimario("Dark Curse");
 		mago.setNomeGolpeSecundario("Light Hammer");
 		mago.setNomeDoEspecial("Deadly Bite");
@@ -122,7 +139,7 @@ public class EscolhaPersonagem {
 				// for o golpe primário.
 				JOptionPane.showMessageDialog(null, mago.getNomeGolpePrimario());
 				
-				mago.setDanoGolpePrimario(mago.getDanoGolpePrimarioInicial() + rand.nextInt(25));
+				mago.setDanoGolpePrimario(mago.getDanoGolpePrimarioInicial() + rand.nextInt(20));
 				
 				JOptionPane.showMessageDialog(null, "Dano: " + (dragon.getVida() - (mago.golpePrimarioHeroi(dragon.getVida(),
 						mago.getAtaque(), dragon.getDefesa(), mago.getDanoGolpePrimario()))));
@@ -138,7 +155,7 @@ public class EscolhaPersonagem {
 // Comparação: se a habilidade selecionada for o golpe
 				// secundário.
 				JOptionPane.showMessageDialog(null, mago.getNomeGolpeSecundario());
-				mago.setDanoGolpeSecundario(mago.getDanoGolpeSecundarioInicial() + rand.nextInt(30));
+				mago.setDanoGolpeSecundario(mago.getDanoGolpeSecundarioInicial() + rand.nextInt(25));
 				
 				JOptionPane.showMessageDialog(null, "Dano: " + (dragon.getVida() - (mago.golpeSecundarioHeroi(dragon.getVida(),
 						mago.getAtaque(), dragon.getDefesa(), mago.getDanoDoGolpeSecundario()))));
@@ -151,7 +168,7 @@ public class EscolhaPersonagem {
 						//	// selecionada for Golpe Especial
 				JOptionPane.showMessageDialog(null, mago.getNomeDoEspecial());
 				
-				mago.setDanoDoEspecial(mago.getDanoDoEspecialInicial() + rand.nextInt(35));
+				mago.setDanoDoEspecial(mago.getDanoDoEspecialInicial() + rand.nextInt(30));
 				
 				JOptionPane.showMessageDialog(null, dragon.getVida() - (mago.golpeEspecialHeroi(dragon.getVida(), dragon.getVida(), mago.getAtaque(),
 						dragon.getDefesa(), mago.getDanoDoEspecial())));
@@ -321,7 +338,7 @@ public class EscolhaPersonagem {
 									// for o golpe primário.
 				JOptionPane.showMessageDialog(null, mago.getNomeGolpePrimario());
 				
-				mago.setDanoGolpePrimario(mago.getDanoGolpePrimarioInicial() + rand.nextInt(25));
+				mago.setDanoGolpePrimario(mago.getDanoGolpePrimarioInicial() + rand.nextInt(20));
 
 				JOptionPane.showMessageDialog(null, "Dano: " + (gigante.getVida()
 						- mago.golpePrimarioHeroi(gigante.getVida(), mago.getAtaque(), gigante.getDefesa(),
@@ -339,7 +356,7 @@ public class EscolhaPersonagem {
 				// secundário.
 				JOptionPane.showMessageDialog(null, mago.getNomeGolpeSecundario());
 				
-				mago.setDanoGolpeSecundario(mago.getDanoGolpeSecundarioInicial() + rand.nextInt(30));
+				mago.setDanoGolpeSecundario(mago.getDanoGolpeSecundarioInicial() + rand.nextInt(25));
 				
 				JOptionPane.showMessageDialog(null, "Dano: " + (gigante.getVida()
 						- (mago.golpeSecundarioHeroi(gigante.getVida(), mago.getAtaque(), gigante.getDefesa(),
@@ -353,7 +370,7 @@ public class EscolhaPersonagem {
 											//// selecionada for Golpe Especial
 				JOptionPane.showMessageDialog(null, mago.getNomeDoEspecial());
 				
-				mago.setDanoDoEspecial(mago.getDanoDoEspecialInicial() + rand.nextInt(35));
+				mago.setDanoDoEspecial(mago.getDanoDoEspecialInicial() + rand.nextInt(30));
 				
 				JOptionPane.showMessageDialog(null, "Dano: " + (gigante.getVida()
 						- (mago.golpeEspecialHeroi(mago.getVida(), gigante.getVida(), mago.getAtaque(),
@@ -543,7 +560,7 @@ public class EscolhaPersonagem {
 				
 				mago.setDanoDoEspecial(mago.getDanoDoEspecialInicial() + rand.nextInt(35));
 				
-				JOptionPane.showConfirmDialog(null, "Dano: " + (kraken.getVida() - mago.golpeEspecialHeroi(mago.getVida(), kraken.getVida(), mago.getAtaque(),
+				JOptionPane.showMessageDialog(null, "Dano: " + (kraken.getVida() - mago.golpeEspecialHeroi(mago.getVida(), kraken.getVida(), mago.getAtaque(),
 						kraken.getDefesa(), mago.getDanoDoEspecial())));
 				
 				kraken.setVida(mago.golpeEspecialHeroi(mago.getVida(), kraken.getVida(), mago.getAtaque(),
@@ -728,7 +745,23 @@ public class EscolhaPersonagem {
 		kraken.setDanoDoEspecial(rand.nextInt(20) + 35);
 
 		Guerreiro guerreiro = new Guerreiro();
-		guerreiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+		
+		while(verificanome){
+			try{
+				guerreiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+				for(int i = 0; i < guerreiro.getNome().length(); i++){
+					Character caractere = guerreiro.getNome().charAt(i);
+					if(Character.isDigit(caractere)){
+						throw new Exception("Não pode conter numeros em nomes");
+					}
+				}
+				verificanome = false;
+			}
+			catch(Exception nf){
+				JOptionPane.showMessageDialog(null,"Entre apenas com letras!");
+			}
+		}
+		
 		guerreiro.setClasse("Guerreiro"); // Atribuição da Classe ao personagem
 		guerreiro.setTipo("Physical Damage"); // Atribuição do Tipo de personagem
 		guerreiro.setAtaque(rand.nextInt(25) + 15); // valor randomico para o ataque do mago
@@ -805,7 +838,7 @@ public class EscolhaPersonagem {
 				
 				guerreiro.setDanoDoEspecial(guerreiro.getDanoDoEspecialInicial() + rand.nextInt(35));
 				
-				JOptionPane.showConfirmDialog(null, "Dano: " + (dragon.getVida() - guerreiro.golpeEspecialHeroi(guerreiro.getVida(), gigante.getVida(), guerreiro.getAtaque(),
+				JOptionPane.showMessageDialog(null, "Dano: " + (dragon.getVida() - guerreiro.golpeEspecialHeroi(guerreiro.getVida(), gigante.getVida(), guerreiro.getAtaque(),
 						gigante.getDefesa(), guerreiro.getDanoDoEspecial())));;
 				
 				dragon.setVida(guerreiro.golpeEspecialHeroi(guerreiro.getVida(), dragon.getVida(), guerreiro.getAtaque(),
@@ -959,7 +992,7 @@ public class EscolhaPersonagem {
 			
 			guerreiro.setDanoGolpePrimario(guerreiro.getDanoGolpePrimarioInicial() + rand.nextInt(15));
 			
-			JOptionPane.showConfirmDialog(null, "Dano: " + (gigante.getVida() - guerreiro.golpePrimarioHeroi(gigante.getVida(), guerreiro.getAtaque(), gigante.getDefesa(),
+			JOptionPane.showMessageDialog(null, "Dano: " + (gigante.getVida() - guerreiro.golpePrimarioHeroi(gigante.getVida(), guerreiro.getAtaque(), gigante.getDefesa(),
 					guerreiro.getDanoGolpePrimario()))); 
 			
 			gigante.setVida(guerreiro.golpePrimarioHeroi(gigante.getVida(), guerreiro.getAtaque(), gigante.getDefesa(),
@@ -1359,7 +1392,23 @@ public class EscolhaPersonagem {
 		kraken.setDanoDoEspecial(rand.nextInt(20) + 35);
 
 		Arqueiro arqueiro = new Arqueiro();
-		arqueiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+		
+		while(verificanome){
+			try{
+				arqueiro.setNome(JOptionPane.showInputDialog("Insira seu nome:"));
+				for(int i = 0; i < arqueiro.getNome().length(); i++){
+					Character caractere = arqueiro.getNome().charAt(i);
+					if(Character.isDigit(caractere)){
+						throw new Exception("Não pode conter numeros em nomes");
+					}
+				}
+				verificanome = false;
+			}
+			catch(Exception nf){
+				JOptionPane.showMessageDialog(null,"Entre apenas com letras!");
+			}
+		}
+		
 		arqueiro.setClasse("Arqueiro");// Classe do tipo Arqueiro
 		arqueiro.setTipo("Physical Damage");// Denife o tipo de dano
 		arqueiro.setAtaque(rand.nextInt(20) + 30); // valor randomico para o ataque do mago
@@ -2059,21 +2108,21 @@ abstract class Personagem {
 	public double golpeEspecialMonstro(double vidaDoInimigo, int danoDeAtaquePerso, int defesaInim, int danoEspecial,
 			double multDeDano) {
 		if ((danoEspecial + (danoDeAtaquePerso - defesaInim)) * multDeDano < 0){
-			return (danoEspecial + (danoDeAtaquePerso - defesaInim)) * multDeDano;
+			return vidaDoInimigo -  (danoEspecial + (danoDeAtaquePerso - defesaInim)) * multDeDano;
 		}
 		return vidaDoInimigo - (danoEspecial + (danoDeAtaquePerso - defesaInim)) * multDeDano;
 	}
 
 	public double golpePrimarioHeroi(double vidaDoInim, int danoDeAtaquePerso, int defesaInim, int danoPrimario) {
 		if (danoPrimario + (danoDeAtaquePerso - defesaInim) < 0){
-			return (danoPrimario - (danoDeAtaquePerso - defesaInim));
+			return vidaDoInim - (danoPrimario - (danoDeAtaquePerso - defesaInim));
 		}
 		return vidaDoInim - (danoPrimario + (danoDeAtaquePerso - defesaInim));
 	}
 
 	public double golpeSecundarioHeroi(double vidaDoPers, int danoDeAtaquePerso, int defesaInim, int danoSecundario) {
 		if ((danoSecundario + (danoDeAtaquePerso - defesaInim)) < 0){
-			return vidaDoPers -  danoSecundario -(danoDeAtaquePerso - defesaInim);
+			return vidaDoPers - (danoSecundario -(danoDeAtaquePerso - defesaInim));
 		}
 		return vidaDoPers - (danoSecundario + (danoDeAtaquePerso - defesaInim));
 	}
@@ -2081,7 +2130,7 @@ abstract class Personagem {
 	public double golpeEspecialHeroi(double vidaDoPers, double vidaDoInim, int danoDeAtaquePerso, int defesaInim,
 			int danoEspecial) {
 		if((danoEspecial + (danoDeAtaquePerso - defesaInim)) < 0){
-			return vidaDoPers - danoEspecial - (danoDeAtaquePerso - defesaInim);
+			return vidaDoPers - (danoEspecial - (danoDeAtaquePerso - defesaInim));
 		}
 		return vidaDoPers - (danoEspecial + (danoDeAtaquePerso - defesaInim)); 
 	}
@@ -2121,7 +2170,6 @@ class Herois extends Personagem {
 	public int getDanoDoEspecialInicial() {
 		return danoEspecialInicial;
 	}
-	
 
 	public void setClasse(String classe) {
 		this.classe = classe;
@@ -2156,8 +2204,9 @@ class Guerreiro extends Herois {
 
 class Monstros extends Personagem {
 	private double multiplicadorDeDano;
-	private String mensagemDeVitoria = "";
-	private String mensagemDeDerrota = "";
+	
+	//private String mensagemDeVitoria = "";
+	//private String mensagemDeDerrota = "";
 
 	public double getMultiplicadorDeDano() {
 		return multiplicadorDeDano;
@@ -2177,6 +2226,7 @@ class Monstros extends Personagem {
 }
 
 class Dragao extends Monstros {
+	/*
 	@Override
 	public String getMensagemDeVitoria() {
 		return "//frase de vitoria";
@@ -2186,9 +2236,11 @@ class Dragao extends Monstros {
 	public String getMensagemDeDerrota() {
 		return "//frase de vitoria";
 	}
+	*/
 }
 
 class Gigante extends Monstros {
+	/*
 	@Override
 	public String getMensagemDeVitoria() {
 		return "//frase de vitoria";
@@ -2198,9 +2250,11 @@ class Gigante extends Monstros {
 	public String getMensagemDeDerrota() {
 		return "//frase de vitoria";
 	}
+	*/
 }
 
 class Kraken extends Monstros {
+	/*
 	@Override
 	public String getMensagemDeVitoria() {
 		return "";
@@ -2210,4 +2264,5 @@ class Kraken extends Monstros {
 	public String getMensagemDeDerrota() {
 		return "//frase de vitoria";
 	}
+	*/
 }
