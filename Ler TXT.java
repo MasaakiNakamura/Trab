@@ -10,8 +10,6 @@ public class LerTxt {
 	String nomeDoArq = nome.nomeDoArquivo;
 	// nome do do arquivo (eu importei da classe 'CriarTxt' para manter o mesmo nome)
 	String linha = "";
-	String login[][] = new String[5][2];
-	int a = 0; //parametro apra mudar a leitura de usuario e senha
 	public void LerTXT(){
 		File arquivo = new File(nomeDoArq); 
 		if(arquivo.exists()){ //retorna valor verdadeiro ou falso
@@ -23,17 +21,14 @@ public class LerTxt {
 				//leitor do arquivo
 				BufferedReader leitor = new BufferedReader(reader);
 				while(true){
-					loginUsuario[a] = leitor.readLine();
-					loginSenha[a] = leitor.readLine();
+					loginUsuario[0] = leitor.readLine();
+					loginSenha[0] = leitor.readLine();
+					mostrar += "Usuário[" + 1 + "]: " + "\n" + "Nome: " + loginUsuario[0] + "\n" +
+							"Senha: " + loginSenha[0];
 					linha = leitor.readLine();
-					login[a][0] = loginUsuario[a];
-					login[a][1] = loginSenha[a];
-					if((linha == null) || (loginUsuario[a] == null) || (loginSenha[a] == null)){
+					if(linha == null){
 						break;
 					}
-					mostrar += "Usuário[" + a + "]: " + "\n" + "Nome: " + loginUsuario[a] + "\n" +
-							"Senha: " + loginSenha[a] + linha + "\n\n";
-				a++;
 				}
 				leitor.close();
 			}
