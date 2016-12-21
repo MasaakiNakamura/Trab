@@ -4,24 +4,22 @@ import javax.swing.*;
 import java.util.Formatter;
 public class CriarTxt {
 	String nomeDoArquivo = "DadosDeCadastro.txt";	
-	public String nomeDeUsuario[] = new String [5];
+	public String nomeDeUsuario[] = new String [1];
 	String senha[] = new String[5];
 	String informacoes = "";
-	public String login[][] = new String[5][2];
-	public int a = 0;
+	String login[][] = new String[1][2];
 	boolean control = false;
 	
 	public void CriarTXT(){
 		try {
 			Formatter saida = new Formatter(this.nomeDoArquivo);
 			JOptionPane.showMessageDialog(null, "Digite os dados do seu cadastro:");
-			this.nomeDeUsuario[a] = JOptionPane.showInputDialog("Nome de usuário:");
-			this.senha[a] = JOptionPane.showInputDialog("Senha:");
-			login[a][0] = this.nomeDeUsuario[a];
-			login[a][1] = this.senha[a];
-			informacoes += this.nomeDeUsuario[a] + "\n" + this.senha[a] + "\n\n";
+			this.nomeDeUsuario[0] = JOptionPane.showInputDialog("Nome de usuário ou email:");
+			this.senha[0] = JOptionPane.showInputDialog("Senha:");
+			login[0][0] = this.nomeDeUsuario[0];
+			login[0][1] = this.senha[0];
+			informacoes += this.nomeDeUsuario[0] + "\n" + this.senha[0];
 			saida.format(informacoes);
-			a++;
 			saida.close();
 			JOptionPane.showMessageDialog(null,"Arquivo " + this.nomeDoArquivo + " criado!", "Arquivo",1 );
 		}
