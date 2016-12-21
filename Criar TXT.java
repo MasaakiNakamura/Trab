@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.util.Formatter;
 public class CriarTxt {
 	String nomeDoArquivo = "DadosDeCadastro.txt";	
-	public String nomeDeUsuario[] = new String [1];
-	String senha[] = new String[5];
+	String nomeDeUsuario[] = new String [1];
+	String senha[] = new String[1];
 	String informacoes = "";
 	String login[][] = new String[1][2];
 	boolean control = false;
