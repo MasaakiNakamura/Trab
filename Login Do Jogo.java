@@ -1,33 +1,34 @@
 package prova;
 
 import javax.swing.JOptionPane;
-public class Login {
+public class loginDoJogo {
+	LerUsuario lerUsuario = new LerUsuario();
+	LerSenha lerSenha = new LerSenha();
+	String usuarioLogin;
+	String usuarioSenha;
+	int i = 0; //variáveis que servem para definir a linha e a coluna da matriz de logins
 	public void login(){
-		int i;
-		boolean controleDeLogin = true;
-		
-		String nomeDeUsuario;
-		String senhaDeUsuario;
-		String usuarios[] = {"tsylasac@gmail.com", "fcfmuller@gmail.com", "projetonewton.ufpa@gmail.com",
-							"renatofarias@gmail.com", "arissaniwa3@gmail.com", "masaaki_naka@hotmail.com"};
-		String senhas[] = {"thiagosylas", "franciscomuller", "projetonewton", "renatofarias",
-							"arissaniwa", "masaakinakamura"};
-		JOptionPane.showMessageDialog(null, "Coloque seus dados de login");
-		
-		while(controleDeLogin){
-			nomeDeUsuario = JOptionPane.showInputDialog("Digite seu nome de usuario ou email: \nDica: Coloque o seu email");
-			senhaDeUsuario = JOptionPane.showInputDialog("Digite sua senha: \nDica: Coloque seu nome");
-		
-			for(i = 0; i < 6; i++){
-				if((nomeDeUsuario.equals(usuarios[i]) && (senhaDeUsuario.equals(senhas[i])))){
-					JOptionPane.showMessageDialog(null, "Login feito com sucesso");
-					controleDeLogin = false;
-				}
-			}		
-		
+
+		boolean controleDeLogin = false; //boolean para saber se o usuario acertou o errou o login da conta
+		while(i < 4){
+			usuarioLogin = JOptionPane.showInputDialog("Nome de usuário:");
+			usuarioSenha = JOptionPane.showInputDialog("Senha:");
+			if(lerSenha.LerSenhaTXT().equals(usuarioLogin)){
+				if(lerUsuario.LerUsuarioTXT().equals(usuarioSenha)){
+					JOptionPane.showMessageDialog(null, "Dados corretos");
+					JOptionPane.showMessageDialog(null, "Bom Jogo!!");
+					controleDeLogin = true;
+					//return 
+				}			
+			}
+			i++;
 			if(controleDeLogin){
-				JOptionPane.showMessageDialog(null, "Dados de Login inválidos" + "\n" + "Insira os dados novamente:");
+				break;
+			} else{
+				JOptionPane.showMessageDialog(null, "Dados incorretos!!" + "\n" +
+						"Por favor, insira os dados de login, novamente:");
 			}
 		}
+		//return "";
 	}
 }
